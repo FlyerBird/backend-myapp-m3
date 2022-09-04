@@ -1,7 +1,7 @@
 # Project's name REST API
 ## Description
 
-This is a the backend repository for the React application `app's name`.
+This is a the backend repository for the React application `funRide`.
 
 ---
 
