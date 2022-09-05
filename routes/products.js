@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
       }
     });
 
-// @desc    Get single project
+// @desc    Get single product
 // @route   GET /api/v1/products/:id
 // @access  Public
 router.get('/:id', async (req, res, next) => {
@@ -34,10 +34,6 @@ router.get('/:id', async (req, res, next) => {
       next(error);
     }
   });
-
-
-
-
 
 // @desc    Create a product
 // @route   POST /
