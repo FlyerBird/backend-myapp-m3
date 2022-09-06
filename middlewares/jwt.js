@@ -18,6 +18,8 @@ const isAuthenticated = jwt({
   getToken: getTokenFromHeaders //token
 });
 
+//const isAdmin
+
 module.exports = {
   isAuthenticated
 }

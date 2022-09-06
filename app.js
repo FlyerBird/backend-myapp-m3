@@ -9,7 +9,8 @@ const errorHandler = require('./middlewares/errorHandler');
 // Routers require
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-const productsRouter = require('./routes/products');
+const productsRouter = require('./routes/product');
+const userRouter = require('./routes/user');
 const app = express();
 
 // cookies and loggers
@@ -29,7 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 // routes intro
 app.use('/', indexRouter);
 app.use('/api/v1/auth', authRouter);
-app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/product', productsRouter);
+app.use('/api/v1/user', userRouter);
 app.use(errorHandler);
 
 // catch 404 and forward to error handler
