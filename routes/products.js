@@ -47,5 +47,36 @@ router.post('/', async (req, res, next) => {
     }
   });
 
+// @desc    Edit a product
+// @route   PUT /:id
+// @access  Public
+router.put('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const { title, description, price, details, images } = req.body;
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(id, { title, description, price, details, images }, { new: true });
+    res.status(202).json({ data: updatedProduct })
+  } catch (error) {
+    next(error);
+  }
+});
+
+// @desc    Delete a product
+// @route   DELETE /api/v1/products/:id
+// @access  Public
+router.delete('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findById(id);
+    if (!product) {
+      next(new ErrorResponse(`Product not found by id: ${id}`, 404));
+    } else {
+      const deleted = await Product.findByIdAndDelete(id);
+      res.status(202).json({ data: deleted });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

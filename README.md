@@ -31,17 +31,32 @@ npm run seed
 
 ## Models
 
+USER 
+PRODUCT
+
 ### User
 
 Users in the database have the following properties:
 
-```js
 {
   "username": String,
   "email": String,
-  "hashedPassword": String
+  "hashedPassword": String,
+  "role": String
 }
 ```
+### Product
+
+Products in the database have the following properties:
+
+{
+  "title": String,
+  "description": String,
+  "price": Number,
+  "details": String,
+  "images": String
+
+}
 
 ---
 
@@ -57,7 +72,7 @@ Users in the database have the following properties:
 
 ## Useful links
 
-- [Presentation slides]()
+- [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p)
 - [Frontend repository]()
 - [Frontend deploy]()
 - [Deployed REST API]()
