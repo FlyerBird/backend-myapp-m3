@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Product = require('../models/Product');
 const ErrorResponse = require('../utils/error');
-const { isAuthenticated } = require('../middlewares/jwt');
+const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
 
 // @desc    Get all products
 // @route   GET /api/v1/products/

@@ -18,7 +18,25 @@ const isAuthenticated = jwt({
   getToken: getTokenFromHeaders //token
 });
 
-//const isAdmin
+/*
+const isAdmin = (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+  next();
+}
+
+
+router.use(function (req, res, next) {
+  if(req.session.isAdmin){
+    next();
+  }else{
+    res.redirect('./login');
+  }
+});
+*/
+
+
 
 module.exports = {
   isAuthenticated

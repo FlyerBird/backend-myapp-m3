@@ -2,6 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 // Import the model
 
+
 // Place the array you want to seed
 
 mongoose.connect(process.env.MONGO_URL)
