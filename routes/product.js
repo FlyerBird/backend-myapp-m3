@@ -38,10 +38,10 @@ router.get('/:id', async (req, res, next) => {
 // @desc    Create a product
 // @route   POST /
 // @access  Public
-router.post('/', async (req, res, next) => {
-  //const { title, description, price, details, images } = req.body;
+router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
+   const { title, description, price, details, images } = req.body;
     try {
-      const product = await Product.create(req.body);
+      const product = await Product.create({ title, description, price, details, images });
       res.status(201).json({ data: product })
     } catch (error) {
       next(error);
@@ -51,7 +51,7 @@ router.post('/', async (req, res, next) => {
 // @desc    Edit a product
 // @route   PUT /:id
 // @access  Public
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
   const { id } = req.params;
   const { title, description, price, details, images } = req.body;
   try {
@@ -65,7 +65,7 @@ router.put('/:id', async (req, res, next) => {
 // @desc    Delete a product
 // @route   DELETE /api/v1/products/:id
 // @access  Public
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
   const { id } = req.params;
   try {
     const product = await Product.findById(id);

@@ -1,4 +1,5 @@
 const { expressjwt: jwt } = require('express-jwt');
+const User = require('../models/User');
 
 // Function used to extract the JWT token from the request's 'Authorization' Headers
 function getTokenFromHeaders(req) {
@@ -18,27 +19,18 @@ const isAuthenticated = jwt({
   getToken: getTokenFromHeaders //token
 });
 
-/*
+
 const isAdmin = (req, res, next) => {
-  if (!req.session.currentUser) {
-    return res.redirect('/auth/login');
+  const payload = req.payload;
+  console.log(payload , " I am the middleware")
+  if (req.payload.role === "admin") {
+  next()
+    } else {
+    return res.status(401).json("Unauthorized")
   }
-  next();
 }
 
-
-router.use(function (req, res, next) {
-  if(req.session.isAdmin){
-    next();
-  }else{
-    res.redirect('./login');
-  }
-});
-*/
-
-
-
 module.exports = {
-  isAuthenticated
+  isAuthenticated, isAdmin
 }
 

@@ -19,6 +19,13 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 400);
   }
 
+ 
+  //Mongoose unauthorized Role
+  if (err.code === 401) {
+    const message = 'Unauthorized';
+    error = new ErrorResponse(message, 401);
+  }
+
   res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || 'Server error'

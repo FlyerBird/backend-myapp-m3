@@ -66,7 +66,8 @@ router.post('/login', async (req, res, next) => {
         const payload = {
           email: userInDB.email,
           username: userInDB.username,
-          _id: userInDB._id
+          _id: userInDB._id,
+          role: userInDB.role
         }
         // Use the jwt middleware to create de token
         const authToken = jwt.sign(
