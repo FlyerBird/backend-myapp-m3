@@ -22,7 +22,7 @@ const isAuthenticated = jwt({
 
 const isAdmin = (req, res, next) => {
   const payload = req.payload;
-  console.log(payload , " I am the middleware")
+  //console.log(payload , " I am the middleware")
   if (req.payload.role === "admin") {
   next()
     } else {
