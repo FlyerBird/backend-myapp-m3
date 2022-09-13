@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Product = require('../models/Product');
 const ErrorResponse = require('../utils/error');
 const { isAuthenticated, isAdmin } = require('../middlewares/jwt');
+const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Get all products
 // @route   GET /api/v1/products/
@@ -34,6 +35,17 @@ router.get('/:id', async (req, res, next) => {
       next(error);
     }
   });
+
+// @desc    Upload a picture to Cloudinary
+// @route   POST /api/v1/product/upload
+// @access  Private
+router.post("/upload", fileUploader.single("image"), (req, res, next) => {
+  if (!req.file) {
+    next(new ErrorResponse('Error uploading the image', 500));
+    return;
+  }
+  res.json({ fileUrl: req.file.path });
+});
 
 // @desc    Create a product
 // @route   POST /

@@ -5,12 +5,24 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require('../middlewares/jwt');
 const saltRounds = 10;
+const fileUploader = require("../config/cloudinary.config");
+
+// @desc    Upload a picture to Cloudinary
+// @route   POST /api/v1/auth/upload
+// @access  Private
+router.post("/upload", fileUploader.single("imageProfile"), (req, res, next) => {
+  if (!req.file) {
+    next(new ErrorResponse('Error uploading the image', 500));
+    return;
+  }
+  res.json({ fileUrl: req.file.path });
+});
 
 // @desc    SIGN UP new user
 // @route   POST /api/v1/auth/signup
 // @access  Public
 router.post('/signup', async (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, imageProfile } = req.body;
   // Check if email or password or name are provided as empty string 
   if (email === "" || password === "" || username === "") {
     return next(new ErrorResponse('Please fill all the fields to register', 400))
@@ -32,10 +44,11 @@ router.post('/signup', async (req, res, next) => {
     } else {
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      const user = await User.create({ email, hashedPassword, username });
+      const user = await User.create({ email, hashedPassword, username, imageProfile });
       const publicUser = { // Decide what fields of our user we want to return 
         username: user.username,
         email: user.email,
+        imageProfile: user.imageProfile
       }
       res.status(201).json({ data: publicUser });
     }
@@ -67,7 +80,8 @@ router.post('/login', async (req, res, next) => {
           email: userInDB.email,
           username: userInDB.username,
           _id: userInDB._id,
-          role: userInDB.role
+          role: userInDB.role,
+          imageProfile: userInDB.imageProfile
         }
         // Use the jwt middleware to create de token
         const authToken = jwt.sign(
