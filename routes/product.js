@@ -65,9 +65,9 @@ router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
 // @access  Public
 router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
   const { id } = req.params;
-  const { title, description, price, details, images } = req.body;
+  const { title, description, price, details } = req.body;
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(id, { title, description, price, details, images }, { new: true });
+    const updatedProduct = await Product.findByIdAndUpdate(id, { title, description, price, details }, { new: true });
     res.status(202).json({ data: updatedProduct })
   } catch (error) {
     next(error);

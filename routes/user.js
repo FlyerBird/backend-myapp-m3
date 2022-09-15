@@ -3,6 +3,19 @@ const User = require('../models/User');
 const ErrorResponse = require('../utils/error');
 const { isAuthenticated } = require('../middlewares/jwt');
 
+router.get('/loggedInUser', isAuthenticated, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.payload._id);
+    if (!user) {
+      next(new ErrorResponse('No user found', 404));
+      return;
+    }
+    res.status(200).json({ data: user })
+  } catch (error) {
+    next(error);
+  }
+});
+
 // @desc    Edit an user
 // @route   PUT /:id
 // @access  Public
