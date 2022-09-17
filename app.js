@@ -11,7 +11,9 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/product');
 const userRouter = require('./routes/user');
+const cartRouter = require('./routes/cart');
 const app = express();
+
 
 // cookies and loggers
 app.use(cors({
@@ -32,6 +34,7 @@ app.use('/', indexRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/product', productsRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/cart', cartRouter)
 app.use(errorHandler);
 
 // catch 404 and forward to error handler
