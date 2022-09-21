@@ -7,7 +7,7 @@ const { isAuthenticated } = require('../middlewares/jwt');
 // @desc    Get Cart
 // @route   GET /api/v1/products-cart/
 // @access  Public
-// to http://localhost:8000/api/v1/product-cart returns the following response.
+// to http://localhost:8000/api/v1/cart returns the following response.
 router.get('/', isAuthenticated, async (req, res, next) => {
     try {
         const cart = await Cart.find({idUser: req.payload._id}).populate('products');
@@ -52,6 +52,7 @@ router.put('/:id', isAuthenticated, async (req, res, next) => {
       next(error);
     }
   });
+  */
   
   // @desc    Delete a product in Cart
   // @route   DELETE /api/v1/products-cart/:id
@@ -63,12 +64,12 @@ router.put('/:id', isAuthenticated, async (req, res, next) => {
       if (!productsCart) {
         next(new ErrorResponse(`Product not found by id: ${id}`, 404));
       } else {
-        const deletedProductCart = await Cart.findByIdAndDelete(id);
+        const deletedProductCart = await Cart.findByIdAndDelete(id, {product});
         res.status(202).json({ data: deletedProductCart });
       }
     } catch (error) {
       next(error);
     }
   });
-*/
+
 module.exports = router;
