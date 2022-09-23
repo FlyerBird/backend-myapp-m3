@@ -44,16 +44,15 @@ router.post('/', isAuthenticated, async (req, res, next) => {
   // @access  Public
   router.put('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
-    const { _id } = req.payload;
     try {
-      //const productsCart = await Cart.findById(id);
-      const cartUser = await Cart.find(_id)
+      const cartUser = await Cart.find({idUser: req.payload._id}).populate('products');
       if (!cartUser) {
         next(new ErrorResponse(`Cart not found by id: ${id}`, 404));
       } else {
-        const deletedProductCart = await Cart.products.pull(id);
+        const cartUserUpdated = await cartUser.products.pull(id);
         cartUser.save();
-        res.status(202).json({ data: deletedProductCart });
+        const newCart = await Cart.find(cartUserUpdated, {idUser: req.payload._id})
+        res.status(202).json({ data: newCart });
       }
     } catch (error) {
       next(error);
