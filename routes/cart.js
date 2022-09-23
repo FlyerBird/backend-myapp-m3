@@ -38,38 +38,27 @@ router.post('/', isAuthenticated, async (req, res, next) => {
        next(error);
      }
    });
-/*
-// @desc    Edit a product in Cart
-// @route   PUT /:id
-// @access  Public
-router.put('/:id', isAuthenticated, async (req, res, next) => {
-    const { id } = req.params;
-    const { product } = req.body;
-    try {
-      const updatedproductsCart = await Cart.findByIdAndUpdate(id, { product }, { new: true });
-      res.status(202).json({ data: updatedproductsCart })
-    } catch (error) {
-      next(error);
-    }
-  });
-  */
-  
+
   // @desc    Delete a product in Cart
   // @route   DELETE /api/v1/products-cart/:id
   // @access  Public
-  router.delete('/:id', isAuthenticated, async (req, res, next) => {
+  router.put('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
+    const { _id } = req.payload;
     try {
-      const productsCart = await Cart.findById(id);
-      if (!productsCart) {
-        next(new ErrorResponse(`Product not found by id: ${id}`, 404));
+      //const productsCart = await Cart.findById(id);
+      const cartUser = await Cart.find(_id)
+      if (!cartUser) {
+        next(new ErrorResponse(`Cart not found by id: ${id}`, 404));
       } else {
-        const deletedProductCart = await Cart.findByIdAndDelete(id, {product});
+        const deletedProductCart = await Cart.products.pull(id);
+        cartUser.save();
         res.status(202).json({ data: deletedProductCart });
       }
     } catch (error) {
       next(error);
     }
   });
+
 
 module.exports = router;
