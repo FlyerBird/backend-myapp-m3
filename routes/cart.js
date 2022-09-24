@@ -42,16 +42,16 @@ router.post('/', isAuthenticated, async (req, res, next) => {
   // @desc    Delete a product in Cart
   // @route   DELETE /api/v1/products-cart/:id
   // @access  Public
-  router.put('/:id', isAuthenticated, async (req, res, next) => {
+  router.delete('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     try {
-      const cartUser = await Cart.find({idUser: req.payload._id}).populate('products');
+      const cartUser = await Cart.findOne({idUser: req.payload._id});
       if (!cartUser) {
-        next(new ErrorResponse(`Cart not found by id: ${id}`, 404));
+        next(new ErrorResponse("Cart not found", 404));
       } else {
-        const cartUserUpdated = await cartUser.products.pull(id);
+        cartUser.products.pull({_id: id});
         cartUser.save();
-        const newCart = await Cart.find(cartUserUpdated, {idUser: req.payload._id})
+        const newCart = await Cart.findOne({idUser: req.payload._id})
         res.status(202).json({ data: newCart });
       }
     } catch (error) {
