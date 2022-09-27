@@ -1,4 +1,4 @@
-# Project's name REST API
+# funRide REST API
 ## Description
 
 This is a the backend repository for the React application `funRide`.
@@ -58,6 +58,16 @@ Products in the database have the following properties:
 
 }
 
+### Cart
+
+Cart in the database have the following properties:
+
+{
+  products: [{type: Schema.Types.ObjectId, ref: "Product"}],
+  idUser: {type: Schema.Types.ObjectId, ref: "User"}
+
+}
+
 ---
 
 ## API endpoints and usage 
@@ -73,7 +83,8 @@ Products in the database have the following properties:
 ## Useful links
 
 - [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p)
-- [Frontend repository]()
-- [Frontend deploy]()
-- [Deployed REST API]()
+- [Backend repository](https://github.com/FlyerBird/backend-myapp-m3)
+- [Frontend repository](https://github.com/FlyerBird/frontend-myapp-m3)
+- [Frontend deploy](https://master--funride.netlify.app)
+
 
