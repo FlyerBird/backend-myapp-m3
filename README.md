@@ -80,7 +80,9 @@ Cart in the database have the following properties:
 
 ---
 
-## Useful links
+Useful links
+
+<a href="https://docs.google.com/presentation/d/" target="_blank">Presentation slides</a>
 
 - [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p)
 - [Backend repository](https://github.com/FlyerBird/backend-myapp-m3)
