@@ -9,7 +9,7 @@ const fileUploader = require("../config/cloudinary.config");
 
 // @desc    Upload a picture to Cloudinary
 // @route   POST /api/v1/auth/upload
-// @access  Private
+// @access  Public
 router.post("/upload", fileUploader.single("imageProfile"), (req, res, next) => {
   if (!req.file) {
     next(new ErrorResponse('Error uploading the image', 500));

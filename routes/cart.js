@@ -6,7 +6,7 @@ const { isAuthenticated } = require('../middlewares/jwt');
 
 // @desc    Get Cart
 // @route   GET /api/v1/products-cart/
-// @access  Public
+// @access  Private
 // to http://localhost:8000/api/v1/cart returns the following response.
 router.get('/', isAuthenticated, async (req, res, next) => {
     try {
@@ -22,7 +22,7 @@ router.get('/', isAuthenticated, async (req, res, next) => {
 
   // @desc    Create a product in Cart
 // @route   POST /
-// @access  Public
+// @access  Private
 router.post('/', isAuthenticated, async (req, res, next) => {
     const { productId } = req.body;
      try {
@@ -41,7 +41,7 @@ router.post('/', isAuthenticated, async (req, res, next) => {
 
   // @desc    Delete a product in Cart
   // @route   DELETE /api/v1/products-cart/:id
-  // @access  Public
+  // @access  Private
   router.delete('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     try {

@@ -48,8 +48,8 @@ router.post("/upload", fileUploader.single("image"), (req, res, next) => {
 });
 
 // @desc    Create a product
-// @route   POST /
-// @access  Public
+// @route   POST  /api/v1/create-product
+// @access  Private
 router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
    const { title, description, price, details, images } = req.body;
     try {
@@ -61,8 +61,8 @@ router.post('/', isAuthenticated, isAdmin, async (req, res, next) => {
   });
 
 // @desc    Edit a product
-// @route   PUT /:id
-// @access  Public
+// @route   PUT /api/v1/edit/:id
+// @access  Private
 router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
   const { id } = req.params;
   const { title, description, price, details } = req.body;
@@ -76,7 +76,7 @@ router.put('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
 
 // @desc    Delete a product
 // @route   DELETE /api/v1/products/:id
-// @access  Public
+// @access  Private
 router.delete('/:id', isAuthenticated, isAdmin, async (req, res, next) => {
   const { id } = req.params;
   try {

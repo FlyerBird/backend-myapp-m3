@@ -30,14 +30,10 @@ npm run seed
 ---
 
 ## Models
-
-USER 
-PRODUCT
-
 ### User
 
 Users in the database have the following properties:
-
+```js
 {
   "username": String,
   "email": String,
@@ -48,7 +44,7 @@ Users in the database have the following properties:
 ### Product
 
 Products in the database have the following properties:
-
+```js
 {
   "title": String,
   "description": String,
@@ -57,32 +53,42 @@ Products in the database have the following properties:
   "images": String
 
 }
-
+```
 ### Cart
 
 Cart in the database have the following properties:
-
+```js
 {
   products: [{type: Schema.Types.ObjectId, ref: "Product"}],
   idUser: {type: Schema.Types.ObjectId, ref: "User"}
 
 }
-
+```
 ---
 
 ## API endpoints and usage 
 
-| Action           | Method    | Endpoint             | Req.body                        | Private/Public |
-|------------------|-----------|----------------------|---------------------------------|-----------------|
-| SIGN UP user     | POST      | /api/v1/auth/signup  | { username, email, password }   |    Public |                 
-| LOG IN user      | POST      | /api/v1/auth/login   | { email, password }             |    Public |                  
-| GET logged in user   | GET     | /api/v1/auth/me    |   | Private |
+| Action               | Method    | Endpoint                | Req.body                                       | Private/Public  |
+|----------------------|-----------|-------------------------|------------------------------------------------|-----------------|
+| UPLOAD picture       | POST      | /api/v1/auth/upload     |                                                |    Public       | 
+| SIGN UP user         | POST      | /api/v1/auth/signup     | { username, email, password, imageProfile }    |    Public       |                 
+| LOG IN user          | POST      | /api/v1/auth/login      | { email, password }                            |    Public       |                  
+| GET logged in user   | GET       | /api/v1/auth/me         |                                                |    Private      |
+| GET all products     | GET       | /api/v1/products/       |                                                |    Public       |
+| GET single product   | GET       | /api/v1/product/:id     |                                                |    Public       |
+| UPLOAD picture       | POST      | /api/v1/product/upload  |                                                |    Private      |
+| CREATE product       | POST      | /api/v1/create-product  | { title, description, price, details, images } |    Private      |
+| EDIT   product       | POST      | /api/v1/edit/:id        | { title, description, price, details }         |    Private      |
+| DELETE product       | DELETE    | /api/v1/products/:id    |                                                |    Private      |
+| DELETE user          | DELETE    | /api/v1/user/:id        |                                                |    Private      |
+| GET Cart             | GET       | /api/v1/products-cart   |                                                |    Private      |
+| CREATE cart          | POST      | /api/v1/cart            | { productId }                                  |    Private      |
+| DELETE cart          | DELETE    |/api/v1/products-cart/:id|                                                |    Private      |
+
 
 ---
 
-Useful links
-
-[Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p) 
+## Useful links
 
 - [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p)
 - [Backend repository](https://github.com/FlyerBird/backend-myapp-m3)

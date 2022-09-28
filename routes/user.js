@@ -47,7 +47,7 @@ router.put('/edit', isAuthenticated, async (req, res, next) => {
 
 // @desc    Delete an user
 // @route   DELETE /api/v1/user/:id
-// @access  Public
+// @access  Private
 router.delete('/:id', isAuthenticated, async (req, res, next) => {
     const { id } = req.params;
     try {
