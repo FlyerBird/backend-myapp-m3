@@ -83,7 +83,7 @@ Cart in the database have the following properties:
 Useful links
 
 [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p) 
-
+[Backend repository](https://github.com/FlyerBird/backend-myapp-m3)
 - [Presentation slides](https://docs.google.com/presentation/d/1lG9C0JEs70fODM86R0XsyMLSlpFF0aIYjVLaim-VkDI/edit#slide=id.p)
 - [Backend repository](https://github.com/FlyerBird/backend-myapp-m3)
 - [Frontend repository](https://github.com/FlyerBird/frontend-myapp-m3)
